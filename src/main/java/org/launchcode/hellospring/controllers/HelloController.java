@@ -43,4 +43,35 @@ public class HelloController {
                 "</html>";
     }
 
+    @RequestMapping(value="hello", method = RequestMethod.POST)
+    @ResponseBody
+    public String helloPost(@RequestParam String name, @RequestParam String language) {
+        if (name == null) {
+            name = "world";
+        }
+        return createMessage(name, language);
+    }
+
+    public static String createMessage(String n, String l) {
+        String greeting = "";
+
+        if (l.equals("english")) {
+            greeting = "Hello";
+        }
+        if (l.equals("french")) {
+            greeting = "Bonjour";
+        }
+        if (l.equals("italian")) {
+            greeting = "Bonjourno";
+        }
+        if (l.equals("spanish")) {
+            greeting = "Hola";
+        }
+        if (l.equals("german")) {
+            greeting = "Hallo";
+        }
+        return greeting + " " + n;
+
+    }
+
 }
