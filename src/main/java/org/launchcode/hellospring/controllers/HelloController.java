@@ -30,13 +30,21 @@ public class HelloController {
         return "Hello, " + name + "!";
     }
 
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="form")
     @ResponseBody
     public String helloForm() {
         return "<html>" +
                 "<body>" +
                 "<form action='hello' method='post'>" +
                 "<input type='text' name='name'>" +
+                "<label for='language'>Pick a language:</label>" +
+                "<select name='language' id='language' >" +
+                "<option value='english'>English</option>" +
+                "<option value='french'>French</option>" +
+                "<option value='italian'>Italian</option>" +
+                "<option value='spanish'>Spanish</option>" +
+                "<option value='german'>German</option>" +
+                "</select>" +
                 "<input type='submit' name='Greet me!'>" +
                 "</form>" +
                 "</body>" +
