@@ -1,6 +1,7 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -18,37 +19,23 @@ public class HelloController {
         return "Goodbye, Spring!";
     }
 
-    @GetMapping("hello")
-    @ResponseBody
-    public String helloWithQueryParam(@RequestParam String name) {
-        return "Hello, " + name + "!";
+    @RequestMapping(value = "hello", method = {RequestMethod.GET, RequestMethod.POST})
+        public String helloWithQueryParam(@RequestParam String name, Model model) {
+        String greeting = "Hello, " + name + "!";
+        model.addAttribute("greeting", greeting);
+        return "hello";
     }
 
     @GetMapping("hello/{name}")
-    @ResponseBody
-    public String helloWithPathParam(@PathVariable String name) {
-        return "Hello, " + name + "!";
+        public String helloWithPathParam(@PathVariable String name, Model model) {
+        String greeting = "Hello, " + name + "!";
+        model.addAttribute("greeting", greeting);
+        return "hello";
     }
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="form")
-    @ResponseBody
     public String helloForm() {
-        return "<html>" +
-                "<body>" +
-                "<form action='hello' method='post'>" +
-                "<input type='text' name='name'>" +
-                "<label for='language'>Pick a language:</label>" +
-                "<select name='language' id='language' >" +
-                "<option value='english'>English</option>" +
-                "<option value='french'>French</option>" +
-                "<option value='italian'>Italian</option>" +
-                "<option value='spanish'>Spanish</option>" +
-                "<option value='german'>German</option>" +
-                "</select>" +
-                "<input type='submit' name='Greet me!'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+        return "form";
     }
 
     @RequestMapping(value="hello", method = RequestMethod.POST)
